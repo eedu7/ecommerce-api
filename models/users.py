@@ -11,7 +11,7 @@ class Users(Base, TimestampMixin):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String(255), nullable=True)
     email: Mapped[str] = mapped_column(String(255), unique=True)
-    password: Mapped[str] = mapped_column(String(30))
+    password: Mapped[str] = mapped_column(String(255))
 
     def __repr__(self):
         return f"{self.name} ({self.id})"

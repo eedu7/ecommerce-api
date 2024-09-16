@@ -1,6 +1,7 @@
 from typing import Any, Generic, List, Type, TypeVar
 
 from fastapi import HTTPException, status
+from pyexpat import model
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql.expression import select
 
@@ -29,7 +30,7 @@ class BaseCrud(Generic[ModelType]):
         return model
 
     async def get_by(self, field: str, value: Any) -> ModelType:
-        query = select(getattr(self.model, field))
+        query = select(self.model).where(getattr(self.model, field) == value)
         result = await self.session.scalars(query)
         return result.first()
 

@@ -16,6 +16,9 @@ class ConfigSettings(BaseSettings):
 
 class Config(ConfigSettings):
     MYSQL_URL: str = os.getenv("MYSQL_URL")
+    SECRET_KEY: str = os.getenv("SECRET_KEY")
+    JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM")
+    JWT_EXPIRY: int = 60 * 24 * 7
 
 
 config: Config = Config()

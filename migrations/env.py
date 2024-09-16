@@ -1,10 +1,10 @@
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import engine_from_config, pool
 from sqlalchemy.ext.asyncio import AsyncEngine
-from config import Config
 
-from alembic import context
+from config import Config
 # Import your models here
 from models import Base
 
@@ -17,7 +17,6 @@ if config.config_file_name is not None:
 config.set_main_option(
     "sqlalchemy.url",
     config_settings.MYSQL_URL,
-
 )
 
 # Set the target metadata for autogenerate

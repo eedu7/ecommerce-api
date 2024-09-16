@@ -7,6 +7,5 @@ Sample solution for the [ecommerce-api](https://roadmap.sh/projects/ecommerce-ap
 ```bash
 $ git clone https://github.com/eedu7/ecommerce-api.git
 $ cd ecommerce-api
-$ pip install -r requirements.txt
 $ python main.py
 ```

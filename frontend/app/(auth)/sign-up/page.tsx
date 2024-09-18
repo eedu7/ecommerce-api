@@ -7,8 +7,11 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {useState} from "react";
-import {EyeIcon, MailIcon, User} from "lucide-react";
-import {EyeClosedIcon} from "@radix-ui/react-icons";
+import {MailIcon, User} from "lucide-react";
+import {EyeClosedIcon, EyeOpenIcon} from "@radix-ui/react-icons";
+import axios from "axios";
+import {useToast} from "@/hooks/use-toast";
+import {useRouter} from "next/navigation";
 
 const formSchema = z
     .object({
@@ -24,16 +27,22 @@ const formSchema = z
         confirmPassword: z.string(),
     })
     .refine((data) => data.password === data.confirmPassword, {
-        message: "Passwords do not match", path: ["confirmPassword"], // This sets the error for the confirmPassword field
+        message: "Passwords do not match", path: ["confirmPassword"],
     });
 
 
 const Page = () => {
 
+    const {toast} = useToast();
+    const [loading, setLoading] = useState(false);
+    const {push} = useRouter();
+
+
     const [showPassword, setShowPassword] = useState(false);
     const togglePassword = () => {
         setShowPassword(prevShowPassword => !prevShowPassword);
     }
+
 
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -43,7 +52,25 @@ const Page = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.table(values)
+        setLoading(true);
+
+        axios.post("http://localhost:8000/users/", {name: values.name, email: values.email, password: values.password})
+            .then(response => {
+                console.log("Response Data:", response.data);
+                setLoading(false);
+                push("/");
+            })
+            .catch(error => {
+                setLoading(false);
+                console.log("Error:", error);
+                const errorMessage = error.response?.data?.detail || "Something went wrong. Please try again.";
+
+                toast({
+                    variant: "destructive",
+                    title: "uh oh! Something went wrong.",
+                    description: errorMessage,
+                 })
+            })
     };
 
     return (<Form {...form}>
@@ -88,9 +115,9 @@ const Page = () => {
                             <Input className="dark:bg-gray-900" placeholder="Password"
                                    type={showPassword ? "text" : "password"} {...field} />
                             {!showPassword ? <EyeClosedIcon onClick={togglePassword}
-                                                            className="absolute bottom-1.5 right-3 cursor-pointer"/> :
-                                <EyeIcon onClick={togglePassword}
-                                         className="absolute bottom-1.5 right-3 cursor-pointer"/>}
+                                                            className="absolute bottom-2 size-4 right-3 cursor-pointer"/> :
+                                <EyeOpenIcon onClick={togglePassword}
+                                         className="absolute bottom-2 size-4 right-3 cursor-pointer"/>}
 
                         </div>
                     </FormControl>
@@ -109,7 +136,7 @@ const Page = () => {
                     <FormMessage/>
                 </FormItem>)}
             />
-            <Button type="submit" className="w-full">Submit</Button>
+            <Button type="submit" className="w-full" disabled={loading}>Submit</Button>
         </form>
     </Form>);
 }

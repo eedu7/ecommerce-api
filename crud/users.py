@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from models import Users
+from models import User
 from schemas.token import Token
 from utils.jwt_handler import encode_token
 from utils.password_handler import get_password_hash, verify_password
@@ -23,11 +23,11 @@ def _create_token(user_id) -> Token:
     )
 
 
-class UserCrud(BaseCrud[Users]):
+class UserCrud(BaseCrud[User]):
     def __init__(self, session: AsyncSession):
-        super().__init__(model=Users, session=session)
+        super().__init__(model=User, session=session)
 
-    async def get_by_email(self, email: str) -> Users | None:
+    async def get_by_email(self, email: str) -> User | None:
         user = await self.get_by(field="email", value=email)
         if not user:
             return None

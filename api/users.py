@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 
 from crud import UserCrud
@@ -5,15 +7,16 @@ from dependencies.authentication import AuthenticationRequired
 from dependencies.get_user import get_current_user
 from dependencies.models import get_user_crud
 from schemas.token import Token
-from schemas.users import LoginUser, RegisterUser
+from schemas.users import LoginUser, RegisterUser, UserRead, UserProfileData
+from models import User
 
 router = APIRouter()
 
 
-@router.get("/")
+@router.get("/", response_model=List[UserRead])
 async def get_users(
     skip: int = 0, limit: int = 20, crud: UserCrud = Depends(get_user_crud)
-):
+) -> List[User]:
     users = await crud.get_all(skip=skip, limit=limit)
 
     if not users:
@@ -23,18 +26,18 @@ async def get_users(
     return users
 
 
-@router.post("/")
-async def register(data: RegisterUser, crud: UserCrud = Depends(get_user_crud)):
+@router.post("/", response_model=UserRead)
+async def register(data: RegisterUser, crud: UserCrud = Depends(get_user_crud)) -> User:
     return await crud.register_user(data.model_dump())
 
 
-@router.post("/login")
+@router.post("/login", response_model=Token)
 async def login(data: LoginUser, crud: UserCrud = Depends(get_user_crud)) -> Token:
     return await crud.login_user(email=data.email, password=data.password)
 
 
-@router.get("/me", dependencies=[Depends(AuthenticationRequired)])
-async def me(user: UserCrud = Depends(get_current_user)):
+@router.get("/me", dependencies=[Depends(AuthenticationRequired)], response_model=UserProfileData)
+async def me(user: UserCrud = Depends(get_current_user)) -> User:
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="User not found"

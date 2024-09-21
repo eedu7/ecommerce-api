@@ -1,9 +1,10 @@
+from datetime import datetime
+
 from pydantic import BaseModel, EmailStr, Field
+
 
 class UserBase(BaseModel):
     email: EmailStr = Field(..., examples=["john.doe@example", "<EMAIL>"])
-
-
 
 
 class RegisterUser(UserBase):
@@ -19,3 +20,11 @@ class UserRead(UserBase):
     id: int = Field(..., examples=[1, 2])
     name: str = Field(..., min_length=3, max_length=50, examples=["John Doe"])
     is_active: bool = Field(..., examples=[True, False])
+
+
+class UserProfileData(UserRead):
+    is_staff: bool = Field(..., examples=[True, False])
+    is_admin: bool = Field(..., examples=[True, False])
+    is_superuser: bool = Field(..., examples=[True, False])
+    created_at: datetime = Field(..., examples=[datetime.now(), datetime.now()])
+    updated_at: datetime = Field(..., examples=[datetime.now(), datetime.now()])

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 class TimestampMixin:
     @declared_attr
     def created_at(cls):
-        return mapped_column(DateTime, index=True,default=func.now(), nullable=False)
+        return mapped_column(DateTime, index=True, default=func.now(), nullable=False)
 
     @declared_attr
     def updated_at(cls):

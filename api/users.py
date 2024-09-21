@@ -6,9 +6,9 @@ from crud import UserCrud
 from dependencies.authentication import AuthenticationRequired
 from dependencies.get_user import get_current_user
 from dependencies.models import get_user_crud
-from schemas.token import Token
-from schemas.users import LoginUser, RegisterUser, UserRead, UserProfileData
 from models import User
+from schemas.token import Token
+from schemas.users import LoginUser, RegisterUser, UserProfileData, UserRead
 
 router = APIRouter()
 
@@ -36,7 +36,11 @@ async def login(data: LoginUser, crud: UserCrud = Depends(get_user_crud)) -> Tok
     return await crud.login_user(email=data.email, password=data.password)
 
 
-@router.get("/me", dependencies=[Depends(AuthenticationRequired)], response_model=UserProfileData)
+@router.get(
+    "/me",
+    dependencies=[Depends(AuthenticationRequired)],
+    response_model=UserProfileData,
+)
 async def me(user: UserCrud = Depends(get_current_user)) -> User:
     if not user:
         raise HTTPException(

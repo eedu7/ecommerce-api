@@ -1,6 +1,6 @@
 from sqlalchemy import DateTime, func
 from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import mapped_column
 
 
 class TimestampMixin:

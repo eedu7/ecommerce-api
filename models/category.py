@@ -2,9 +2,10 @@ from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from . import Base
+from .mixins import TimestampMixin, UserStampMixin
 
 
-class Category(Base):
+class Category(Base, TimestampMixin, UserStampMixin):
     __tablename__ = 'category'
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)

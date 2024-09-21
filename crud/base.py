@@ -1,7 +1,5 @@
 from typing import Any, Generic, List, Type, TypeVar
 
-from fastapi import HTTPException, status
-from pyexpat import model
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql.expression import select
 

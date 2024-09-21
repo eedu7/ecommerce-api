@@ -5,7 +5,6 @@ from models import User
 from schemas.token import Token
 from utils.jwt_handler import encode_token
 from utils.password_handler import get_password_hash, verify_password
-
 from .base import BaseCrud
 
 
@@ -27,10 +26,19 @@ class UserCrud(BaseCrud[User]):
     def __init__(self, session: AsyncSession):
         super().__init__(model=User, session=session)
 
-    async def get_by_email(self, email: str) -> User | None:
+    async def get_by_email(self, email: str) -> User:
         user = await self.get_by(field="email", value=email)
         if not user:
-            return None
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User not found",
+            )
+        return user
+
+    async def get_by_name(self, name: str) -> User:
+        user = await self.get_by(field="name", value=name)
+        if not user:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
         return user
 
     async def register_user(self, user_data: dict[str, any]):

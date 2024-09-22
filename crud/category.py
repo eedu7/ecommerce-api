@@ -36,11 +36,37 @@ class CategoryCRUD(BaseCrud[Category]):
 
     async def update_category(self, category_id: int, data: dict[str, any]) -> Category:
         exist = await self.get_by_id(category_id)
-        if  not exist:
+        if not exist:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Category with name '{data['name']}' does not exist"
             )
+        try:
+            return await self.update(category_id, data)
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Failed to update category: {e}",
+            )
 
-        return await self.(category_id, data)
+    async def delete_category(self, category_id: int) -> bool:
+        exist = await self.get_by_id(category_id)
+        if not exist:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Category with id '{category_id}' does not exist"
+            )
 
+        try:
+            deleted = await self.delete(category_id)
+            if not deleted:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail="Error on deleting category"
+                )
+            return True
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Failed to delete category: {e}",
+            )

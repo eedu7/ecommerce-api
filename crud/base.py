@@ -49,3 +49,11 @@ class BaseCrud(Generic[ModelType]):
             setattr(model, key, value)
         await self.session.commit()
         return model
+
+    async def delete(self, _id: int) -> bool | None:
+        model = await self.get_by(field="id", value=_id)
+        if model is None:
+            return None
+        await self.session.delete(model)
+        await self.session.commit()
+        return True

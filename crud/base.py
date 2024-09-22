@@ -37,3 +37,15 @@ class BaseCrud(Generic[ModelType]):
         if model is None:
             return None
         return model
+
+    async def update(self, _id: int, attributes: dict[str, Any]) -> ModelType | None:
+        model = await self.get_by(field="id", value=_id)
+        if model is None:
+            return None
+        if attributes is None:
+            return None
+
+        for key, value in attributes.items():
+            setattr(model, key, value)
+        await self.session.commit()
+        return model

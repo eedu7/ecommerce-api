@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 
 from dependencies.authentication import AuthenticationRequired
 from middlewares.authentication import AuthBackend, AuthenticationMiddlewares
-
+from .category import router as category_router
 from .users import router as user_router
 
 app = FastAPI(
@@ -25,3 +25,4 @@ async def root(request: Request):
 
 
 app.include_router(user_router, prefix="/users", tags=["User"])
+app.include_router(category_router, prefix="/categories", tags=["Category"])

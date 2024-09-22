@@ -26,13 +26,10 @@ class UserCrud(BaseCrud[User]):
     def __init__(self, session: AsyncSession):
         super().__init__(model=User, session=session)
 
-    async def get_by_email(self, email: str) -> User:
+    async def get_by_email(self, email: str) -> User | None:
         user = await self.get_by(field="email", value=email)
         if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail="User not found",
-            )
+            return None
         return user
 
     async def get_by_name(self, name: str) -> User:
@@ -49,13 +46,15 @@ class UserCrud(BaseCrud[User]):
                 detail="User already registered",
             )
         user_data["password"] = get_password_hash(user_data["password"])
+        try:
+            new_user = await self.create(user_data)
 
-        new_user = await self.create(user_data)
-        if not new_user:
+            return new_user
+        except Exception as e:
             raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST, detail="Error creating user"
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Error registering user: {e}",
             )
-        return new_user
 
     async def login_user(self, email: str, password: str) -> Token:
         user = await self.get_by_email(email)

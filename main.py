@@ -5,7 +5,7 @@ import uvicorn
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--port", type=int, help="Port", default=8001)
+    parser.add_argument("--port", type=int, help="Port", default=8000)
     parser.add_argument("--host", help="Host", default="127.0.0.1")
 
     args = parser.parse_args()

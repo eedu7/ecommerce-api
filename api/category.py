@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import JSONResponse
 
 from crud.category import CategoryCRUD
 from dependencies.authentication import AuthenticationRequired
@@ -36,10 +37,14 @@ async def create_category(data: CategoryCreate, crud: CategoryCRUD = Depends(get
 
 
 @router.patch("/{category_id}", dependencies=[Depends(AuthenticationRequired)])
-async def update_category(category_id: int, data: CategoryUpdate, crud: CategoryCRUD = Depends(get_categories_crud),
-                          user: User = Depends(get_current_user)):
+async def update_category(category_id: int, data: CategoryUpdate, crud: CategoryCRUD = Depends(get_categories_crud)):
     return await crud.update_category(category_id, data.model_dump(exclude_none=True))
+
 
 @router.delete("/{category_id}")
 async def delete_category(category_id: int, crud: CategoryCRUD = Depends(get_categories_crud)):
-    ...
+    await crud.delete_category(category_id)
+    return JSONResponse(
+        status_code=status.HTTP_200_OK,
+        content={"detail": f"Category with '{category_id}' deleted successfully!"}
+    )

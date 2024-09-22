@@ -13,3 +13,7 @@ class CategoryCreate(CategoryBase):
 class CategoryUpdate(CategoryBase):
     name: str | None = Field(None, examples=["Name"])
     description: str | None = Field(None, examples=["Some description"])
+
+
+class CategoryResponse(CategoryBase):
+    id: int = Field(..., examples=[1, 2])

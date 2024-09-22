@@ -2,6 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from models import Category
+
 from .base import BaseCrud
 
 
@@ -20,8 +21,7 @@ class CategoryCRUD(BaseCrud[Category]):
         if exist:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Category with name '{data['name']}' already exists"
-
+                detail=f"Category with name '{data['name']}' already exists",
             )
         data["created_by"] = user_id
         data["updated_by"] = user_id
@@ -39,7 +39,7 @@ class CategoryCRUD(BaseCrud[Category]):
         if not exist:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Category with name '{data['name']}' does not exist"
+                detail=f"Category with name '{data['name']}' does not exist",
             )
         try:
             return await self.update(category_id, data)
@@ -54,7 +54,7 @@ class CategoryCRUD(BaseCrud[Category]):
         if not exist:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"Category with id '{category_id}' does not exist"
+                detail=f"Category with id '{category_id}' does not exist",
             )
         print("exist")
         try:
@@ -63,7 +63,7 @@ class CategoryCRUD(BaseCrud[Category]):
             if not deleted:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,
-                    detail="Error on deleting category"
+                    detail="Error on deleting category",
                 )
             return True
         except Exception as e:

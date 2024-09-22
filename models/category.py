@@ -9,7 +9,9 @@ from .mixins import TimestampMixin, UserStampMixin
 class Category(Base, TimestampMixin, UserStampMixin):
     __tablename__ = "category"
 
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(
+        Integer, primary_key=True, index=True, autoincrement=True
+    )
     name: Mapped[str] = mapped_column(
         String(255), index=True, unique=True, nullable=False
     )

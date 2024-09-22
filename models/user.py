@@ -8,7 +8,9 @@ from models.mixins import TimestampMixin
 class User(Base, TimestampMixin):
     __tablename__ = "users"
 
-    id: Mapped[int] = mapped_column(Integer, index=True, primary_key=True)
+    id: Mapped[int] = mapped_column(
+        Integer, index=True, primary_key=True, autoincrement=True
+    )
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     email: Mapped[str] = mapped_column(String(255), index=True, unique=True)
     password: Mapped[str] = mapped_column(String(255))

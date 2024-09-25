@@ -4,7 +4,7 @@ import SignUpCard from "@/features/auth/components/sign-up-card";
 
 const AuthScreen = () => {
     return (
-            <Tabs defaultValue="sign-in" className="w-[400px]">
+            <Tabs defaultValue="sign-in" className="w-[400px] mb-48">
                 <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="sign-in">Sign In</TabsTrigger>
                     <TabsTrigger value="sign-up">Sign Up</TabsTrigger>

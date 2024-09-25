@@ -8,8 +8,12 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
+import {loginUser} from "@/features/auth/api";
+import {useState} from "react";
 
 const SignInForm = () => {
+
+    const [loading, setLoading] = useState<boolean>(false);
     
     const form = useForm<z.infer<typeof signInFormSchema>>({
         resolver: zodResolver(signInFormSchema),
@@ -20,7 +24,10 @@ const SignInForm = () => {
         }
     )
     const onSubmit = async (values: z.infer<typeof signInFormSchema>) => {
+        setLoading(true);
+        await loginUser(values);
         console.table(values);
+        setLoading(false);
     }
     return (
         <Form {...form}>
@@ -45,7 +52,7 @@ const SignInForm = () => {
                     name="password"
                     render={({field}) => (
                         <FormItem>
-                            <FormLabel>Email Address</FormLabel>
+                            <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <div>
                                     <Input type="password" placeholder="Password" {...field} />

@@ -8,23 +8,29 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
-import {EyeIcon, EyeOff, LockIcon, MailIcon, UserIcon} from "lucide-react";
+import {EyeIcon, EyeOff, Loader, LockIcon, MailIcon, UserIcon} from "lucide-react";
 import {useState} from "react";
+import {registerUser} from "@/features/auth/api";
 
 const SignUpForm = () => {
 
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const form = useForm<z.infer<typeof signUpFormSchema>>({
             resolver: zodResolver(signUpFormSchema),
             defaultValues: {
                 email: "",
                 password: "",
+                name: "",
             }
         }
     )
     const onSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
+        setLoading(true);
         console.table(values);
+        await registerUser(values);
+        setLoading(false);
     }
     return (
         <Form {...form}>
@@ -87,7 +93,7 @@ const SignUpForm = () => {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="w-full">Submit</Button>
+                <Button disabled={loading} type="submit" className="w-full">{loading ? <div className="flex gap-2 justify-center items-center w-full"><Loader className="animate-spin" /> Submitting...</div>:  "Submit"}</Button>
             </form>
         </Form>
     )

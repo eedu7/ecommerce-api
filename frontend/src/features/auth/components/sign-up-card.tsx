@@ -1,5 +1,6 @@
 import React from 'react'
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import SignUpForm from "@/features/auth/components/sign-up-form";
 
 const SignUpCard = () => {
     return (
@@ -10,7 +11,7 @@ const SignUpCard = () => {
                     services</CardDescription>
             </CardHeader>
             <CardContent>
-                <div>Sign Up Form</div>
+                <SignUpForm />
             </CardContent>
         </Card>
     )

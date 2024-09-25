@@ -10,23 +10,24 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {loginUser} from "@/features/auth/api";
 import {useState} from "react";
+import {EyeIcon, EyeOff, LockIcon, MailIcon} from "lucide-react";
 
 const SignInForm = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
-    
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+
     const form = useForm<z.infer<typeof signInFormSchema>>({
-        resolver: zodResolver(signInFormSchema),
-        defaultValues: {
-            email: "",
-            password: "",
-        }
+            resolver: zodResolver(signInFormSchema),
+            defaultValues: {
+                email: "",
+                password: "",
+            }
         }
     )
     const onSubmit = async (values: z.infer<typeof signInFormSchema>) => {
         setLoading(true);
         await loginUser(values);
-        console.table(values);
         setLoading(false);
     }
     return (
@@ -39,11 +40,13 @@ const SignInForm = () => {
                         <FormItem>
                             <FormLabel>Email Address</FormLabel>
                             <FormControl>
-                                <div>
-                                    <Input type="email" placeholder="john.doe@example.com" {...field} />
+                                <div className="relative">
+                                    <Input type="email" className="pl-10"
+                                           placeholder="john.doe@example.com" {...field} />
+                                    <MailIcon className="absolute size-6 bottom-1.5 left-2 text-muted-foreground"/>
                                 </div>
                             </FormControl>
-                            <FormMessage />
+                            <FormMessage/>
                         </FormItem>
                     )}
                 />
@@ -54,15 +57,24 @@ const SignInForm = () => {
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                                <div>
-                                    <Input type="password" placeholder="Password" {...field} />
+                                <div className="relative">
+                                    <Input type={showPassword ? "text" : "password"} className="pl-10"
+                                           placeholder="Password" {...field} />
+                                    <LockIcon className="absolute size-6 bottom-1.5 left-2 text-muted-foreground"/>
+                                    {
+                                        showPassword ?
+                                            <EyeOff onClick={() => setShowPassword(false)}
+                                                    className="absolute text-muted-foreground size-6 bottom-1.5 right-2 hover:text-black cursor-pointer"/> :
+                                            <EyeIcon onClick={() => setShowPassword(true)}
+                                                     className="absolute text-muted-foreground size-6 bottom-1.5 right-2 hover:text-black cursor-pointer"/>
+                                    }
                                 </div>
                             </FormControl>
-                            <FormMessage />
+                            <FormMessage/>
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="w-full">Submit</Button>
+                <Button disabled={loading} type="submit" className="w-full">Submit</Button>
             </form>
         </Form>
     )

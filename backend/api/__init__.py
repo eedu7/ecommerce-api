@@ -1,4 +1,5 @@
 from fastapi import Depends, FastAPI, Request, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from dependencies.authentication import AuthenticationRequired
@@ -12,6 +13,13 @@ app = FastAPI(
 )
 
 app.add_middleware(AuthenticationMiddlewares, backend=AuthBackend())
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_headers=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+)
 
 
 @app.get("/", dependencies=[Depends(AuthenticationRequired)])

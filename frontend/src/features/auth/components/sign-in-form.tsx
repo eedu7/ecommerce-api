@@ -10,7 +10,7 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {loginUser} from "@/features/auth/api";
 import {useState} from "react";
-import {EyeIcon, EyeOff, LockIcon, MailIcon} from "lucide-react";
+import {EyeIcon, EyeOff, Loader, LockIcon, MailIcon} from "lucide-react";
 
 const SignInForm = () => {
 
@@ -27,7 +27,10 @@ const SignInForm = () => {
     )
     const onSubmit = async (values: z.infer<typeof signInFormSchema>) => {
         setLoading(true);
-        await loginUser(values);
+        new Promise(resolve => setTimeout(resolve, 2000))
+
+        const response = await loginUser(values);
+        console.table(response);
         setLoading(false);
     }
     return (
@@ -74,7 +77,7 @@ const SignInForm = () => {
                         </FormItem>
                     )}
                 />
-                <Button disabled={loading} type="submit" className="w-full">Submit</Button>
+                <Button disabled={loading} type="submit" className="w-full">{loading ? <div className="flex gap-2 justify-center items-center w-full"><Loader className="animate-spin" /> Submitting...</div>:  "Submit"}</Button>
             </form>
         </Form>
     )

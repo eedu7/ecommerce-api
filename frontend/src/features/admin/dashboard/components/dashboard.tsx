@@ -1,15 +1,9 @@
 import {Button} from "@/components/ui/button";
 import DatabaseTableAccordian from "@/features/admin/dashboard/components/database-table-accordian";
 import {Separator} from "@/components/ui/separator";
-import {DataTable} from "@/features/admin/dashboard/components/data-table";
-import {get_all_categories} from "@/external/category-api";
-import {categoryColumns} from "@/features/admin/dashboard/components/columns";
 
-type table = "user" | "products" | "category" | "address";
 
 const Dashboard = async () => {
-
-    const data = await get_all_categories();
 
 
     return (
@@ -21,7 +15,7 @@ const Dashboard = async () => {
             </aside>
             <section className="col-span-5 mx-2 rounded">
                 <div className="container mx-auto py-10 w-full h-full">
-                    <DataTable columns={categoryColumns} data={data}/>
+                    <h1 className="text-xl font-bold">Data Table</h1>
                 </div>
             </section>
         </section>

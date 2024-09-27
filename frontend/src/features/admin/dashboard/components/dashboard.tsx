@@ -89,7 +89,7 @@ const Dashboard = async () => {
                 <DatabaseTableAccordian/>
             </aside>
             <section className="col-span-5 mx-2 rounded">
-                <div className="container mx-auto py-10 w-full h-full">
+                <div className="container mx-auto py-4 w-full h-full">
                     <DataTable columns={columns} data={data}/>
                 </div>
             </section>

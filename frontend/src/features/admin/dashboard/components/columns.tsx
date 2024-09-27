@@ -11,8 +11,9 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {ArrowUpDown, MoreHorizontal} from "lucide-react";
+import {MoreHorizontal} from "lucide-react";
 import {Checkbox} from "@/components/ui/checkbox";
+import {DataTableColumnHeader} from "@/features/admin/dashboard/components/column-header";
 
 
 export type Payment = {
@@ -55,15 +56,10 @@ export const columns: ColumnDef<Payment>[] = [
         accessorKey: "email",
         header: ({column}) => {
             return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Email
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
-                </Button>
+                <DataTableColumnHeader column={column} title="Email"/>
             )
         },
+
     },
     {
         accessorKey: "amount",

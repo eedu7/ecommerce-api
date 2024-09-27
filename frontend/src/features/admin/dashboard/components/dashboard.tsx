@@ -3,6 +3,7 @@ import DatabaseTableAccordian from "@/features/admin/dashboard/components/databa
 import {Separator} from "@/components/ui/separator";
 import {DataTable} from "@/features/admin/dashboard/components/data-table";
 import {columns, Payment} from "@/features/admin/dashboard/components/columns";
+import {Plus} from "lucide-react";
 
 
 async function getData(): Promise<Payment[]> {
@@ -83,13 +84,19 @@ const Dashboard = async () => {
 
     return (
         <section className="w-full h-full grid grid-cols-6">
-            <aside className="col-span-1 bg-zinc-100 rounded-lg space-y-3.5">
+            <aside className="col-span-1 rounded-lg space-y-3.5">
                 <Button variant="link" className="w-full font-semibold text-lg mt-2" size="lg">Database Table</Button>
                 <Separator/>
-                <DatabaseTableAccordian/>
+                <DatabaseTableAccordian />
             </aside>
-            <section className="col-span-5 mx-2 rounded">
-                <div className="container mx-auto py-4 w-full h-full">
+            <section className="col-span-5 mx-2 rounded-lg shadow-2xl px-2">
+                <div className="container  mx-auto py-4 w-full space-y-3.5">
+                    <div className="flex  w-full p-2 justify-end">
+                        <Button className="space-x-1 ">
+                            <Plus className="size-4" />
+                           <span>Add</span>
+                        </Button>
+                    </div>
                     <DataTable columns={columns} data={data}/>
                 </div>
             </section>

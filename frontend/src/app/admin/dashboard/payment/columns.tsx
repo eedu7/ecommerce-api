@@ -13,7 +13,7 @@ import {
 import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
 import {Checkbox} from "@/components/ui/checkbox";
-import {DataTableColumnHeader} from "@/features/admin/dashboard/components/column-header";
+import {DataTableColumnHeader} from "@/features/admin/dashboard/components/data-table-column-header";
 
 
 export type Payment = {

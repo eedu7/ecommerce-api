@@ -15,8 +15,8 @@ import {
 
 
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
-import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input"
+import {DataTablePagination} from "@/features/admin/dashboard/components/data-table-pagination";
 
 
 interface DataTableProps<TData, TValue> {
@@ -107,21 +107,9 @@ export function DataTable<TData, TValue>({
                     </TableBody>
                 </Table>
             </div>
-            <div className="flex items-center justify-end space-x-2 py-4">
-                <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                    {table.getFilteredRowModel().rows.length} row(s) selected.
-                </div>
-                <Button variant="outline" size="sm" onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}>
-                    Previous
-                </Button>
-                <Button variant="outline" size="sm" onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}>
-                    Next
-                </Button>
+                <DataTablePagination table={table}/>
             </div>
-        </div>
 
-    )
-}
+
+            )
+            }

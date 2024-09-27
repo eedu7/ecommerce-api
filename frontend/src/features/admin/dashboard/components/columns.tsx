@@ -63,16 +63,17 @@ export const columns: ColumnDef<Payment>[] = [
     },
     {
         accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
+        header: ({column}) => (
+
+            <DataTableColumnHeader column={column} title={"Amount"}/>
+        ),
         cell: ({row}) => {
             const amount = parseFloat(row.getValue("amount"));
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
             }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
-
+            return <div className="font-medium">{formatted}</div>
         }
     }, {
         id: "actions",

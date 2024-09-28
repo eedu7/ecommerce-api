@@ -56,10 +56,8 @@ class CategoryCRUD(BaseCrud[Category]):
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Category with id '{category_id}' does not exist",
             )
-        print("exist")
         try:
             deleted = await self.delete(category_id)
-            print("deleted")
             if not deleted:
                 raise HTTPException(
                     status_code=status.HTTP_400_BAD_REQUEST,

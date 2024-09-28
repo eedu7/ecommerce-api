@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 
 from dependencies.authentication import AuthenticationRequired
 from middlewares.authentication import AuthBackend, AuthenticationMiddlewares
-
+from .cart import router as cart_router
 from .category import router as category_router
 from .users import router as user_router
 
@@ -29,9 +29,11 @@ async def root(request: Request):
         return {"message": f"Welcome User with ID: {user_id}"}
     except Exception as e:
         return JSONResponse(
-            status_code=status.HTTP_200_OK, content={"message": "Ecommerce API"}
+            status_code=status.HTTP_200_OK, content={"message": f"Ecommerce API: {e}"}
         )
 
 
 app.include_router(user_router, prefix="/users", tags=["User"])
 app.include_router(category_router, prefix="/categories", tags=["Category"])
+
+app.include_router(cart_router, prefix="/cart", tags=["Cart"])

@@ -4,7 +4,6 @@ from fastapi.responses import JSONResponse
 
 from dependencies.authentication import AuthenticationRequired
 from middlewares.authentication import AuthBackend, AuthenticationMiddlewares
-
 from .category import router as category_router
 from .users import router as user_router
 

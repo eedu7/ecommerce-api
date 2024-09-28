@@ -38,10 +38,6 @@ class CartCRUD(BaseCrud[Cart]):
         return cart
 
     async def create_cart(self, user_id: int):
-        cart = await self.get_by("created_by", user_id)
-        if cart.status == Status.active:
-            return cart
-
         return await self.create({"created_by": user_id, "updated_by": user_id})
 
     async def update_cart(self, cart_id: int, user_id: int):

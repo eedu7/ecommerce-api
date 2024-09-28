@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Navbar = () => {
     return (
-        <header className="w-screen bg-zinc-100">
+        <header className="w-screen">
             <nav className="max-w-7xl mx-auto flex items-center justify-between p-4">
                 <div className="space-x-2">
                     <Button variant="outline">Logo</Button>

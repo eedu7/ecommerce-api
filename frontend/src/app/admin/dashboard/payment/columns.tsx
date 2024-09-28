@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
+import {Checkbox} from "@/components/ui/checkbox";
+import {DataTableColumnHeader} from "@/features/admin/dashboard/components/data-table-column-header";
 
 
 export type Payment = {
@@ -23,25 +25,55 @@ export type Payment = {
 
 export const columns: ColumnDef<Payment>[] = [
     {
+        id: "select",
+        header: ({table}) => (
+            <Checkbox
+                checked={
+                    table.getIsAllPageRowsSelected() ||
+                    (table.getIsSomePageRowsSelected() && "indeterminate")
+                }
+                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                aria-label="Select all"
+
+            />
+        ),
+        cell: ({row}) => (
+            <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                aria-label="Select row"
+            />
+        ),
+        enableSorting: false,
+        enableHiding: false
+
+    },
+    {
         accessorKey: "status",
         header: "Status",
     },
     {
         accessorKey: "email",
-        header: "Email",
+        header: ({column}) => {
+            return (
+                <DataTableColumnHeader column={column} title="Email"/>
+            )
+        },
+
     },
     {
         accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
+        header: ({column}) => (
+
+            <DataTableColumnHeader column={column} title={"Amount"}/>
+        ),
         cell: ({row}) => {
             const amount = parseFloat(row.getValue("amount"));
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
             }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
-
+            return <div className="font-medium">{formatted}</div>
         }
     }, {
         id: "actions",
@@ -68,5 +100,5 @@ export const columns: ColumnDef<Payment>[] = [
                 </DropdownMenu>
             )
         }
-    }
+    },
 ]

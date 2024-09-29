@@ -13,7 +13,7 @@ class ProductCRUD(BaseCrud[Product]):
 
     async def get_all_products(self, skip: int = 0, limit: int = 100):
         try:
-            products = self.get_all(skip=skip, limit=limit)
+            products = await self.get_all(skip=skip, limit=limit)
             if not products:
                 raise HTTPException(
                     status_code=status.HTTP_404_NOT_FOUND,
@@ -26,9 +26,9 @@ class ProductCRUD(BaseCrud[Product]):
                 detail=str(e),
             )
 
-    async def get_by_id(self, product_id: int):
+    async def get_product_by_id(self, product_id: int):
         try:
-            product = await self.get_by_id(product_id=product_id)
+            product = await self.get_by_id(product_id)
 
             if not product:
                 raise HTTPException(
@@ -54,7 +54,14 @@ class ProductCRUD(BaseCrud[Product]):
 
     async def read_product(self, product_id: int) -> Product:
         try:
-            return await self.get_by_id(product_id)
+            product = await self.get_by_id(product_id)
+            if not product:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Product not found",
+
+                )
+            return product
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,

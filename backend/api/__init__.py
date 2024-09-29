@@ -4,7 +4,9 @@ from fastapi.responses import JSONResponse
 
 from dependencies.authentication import AuthenticationRequired
 from middlewares.authentication import AuthBackend, AuthenticationMiddlewares
+
 from .cart import router as cart_router
+from .cart_item import router as cart_item_router
 from .category import router as category_router
 from .users import router as user_router
 
@@ -37,3 +39,4 @@ app.include_router(user_router, prefix="/users", tags=["User"])
 app.include_router(category_router, prefix="/categories", tags=["Category"])
 
 app.include_router(cart_router, prefix="/cart", tags=["Cart"])
+app.include_router(cart_item_router, prefix="/cart-item", tags=["CartItem"])

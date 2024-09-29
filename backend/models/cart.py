@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Integer, Enum
+from sqlalchemy import Enum, ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 
 from db import Base
@@ -10,10 +10,12 @@ class Cart(Base, TimestampMixin, UserStampMixin):
     __tablename__ = "cart"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    status: Mapped[Status] = mapped_column(Enum(Status), nullable=False, default=Status.active)
+    status: Mapped[Status] = mapped_column(
+        Enum(Status), nullable=False, default=Status.active
+    )
 
 
-class CartItem(Base, TimestampMixin):
+class CartItem(Base, TimestampMixin, UserStampMixin):
     __tablename__ = "cart_item"
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     cart_id: Mapped[int] = mapped_column(Integer, ForeignKey("cart.id"), nullable=False)

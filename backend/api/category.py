@@ -15,7 +15,7 @@ router: APIRouter = APIRouter()
 
 @router.get("/", response_model=List[CategoryResponse])
 async def get_all_categories(
-        crud: CategoryCRUD = Depends(get_categories_crud),
+    crud: CategoryCRUD = Depends(get_categories_crud),
 ) -> List[Category]:
     try:
         return await crud.get_all()
@@ -27,7 +27,7 @@ async def get_all_categories(
 
 @router.get("/{category_id}", response_model=CategoryResponse)
 async def get_by_id(
-        category_id: int, crud: CategoryCRUD = Depends(get_categories_crud)
+    category_id: int, crud: CategoryCRUD = Depends(get_categories_crud)
 ) -> Category:
     category: Category = await crud.get_by_id(category_id)
     if not category:
@@ -41,9 +41,9 @@ async def get_by_id(
     "/", dependencies=[Depends(AuthenticationRequired)], response_model=CategoryResponse
 )
 async def create_category(
-        data: CategoryCreate,
-        crud: CategoryCRUD = Depends(get_categories_crud),
-        user: User = Depends(get_current_user),
+    data: CategoryCreate,
+    crud: CategoryCRUD = Depends(get_categories_crud),
+    user: User = Depends(get_current_user),
 ) -> Category:
     return await crud.create_category(
         user_id=user.id, data=data.model_dump(exclude_none=True)
@@ -56,16 +56,16 @@ async def create_category(
     response_model=CategoryResponse,
 )
 async def update_category(
-        category_id: int,
-        data: CategoryUpdate,
-        crud: CategoryCRUD = Depends(get_categories_crud),
+    category_id: int,
+    data: CategoryUpdate,
+    crud: CategoryCRUD = Depends(get_categories_crud),
 ) -> Category:
     return await crud.update_category(category_id, data.model_dump(exclude_none=True))
 
 
 @router.delete("/{category_id}", dependencies=[Depends(AuthenticationRequired)])
 async def delete_category(
-        category_id: int, crud: CategoryCRUD = Depends(get_categories_crud)
+    category_id: int, crud: CategoryCRUD = Depends(get_categories_crud)
 ) -> JSONResponse:
     await crud.delete_category(category_id)
     return JSONResponse(

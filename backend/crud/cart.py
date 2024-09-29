@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-from sqlalchemy import select, desc
+from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from crud.base import BaseCrud
@@ -30,14 +30,18 @@ class CartCRUD(BaseCrud[Cart]):
         return carts
 
     async def get_cart_by_user_id(self, user_id: int):
-        query = select(self.model).where(self.model.created_by == user_id).order_by(desc(self.model.created_at))
+        query = (
+            select(self.model)
+            .where(self.model.created_by == user_id)
+            .order_by(desc(self.model.created_at))
+        )
         result = await self.session.scalars(query)
         cart = result.first()
 
         if not cart:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"No cart found for user with ID: {user_id}"
+                detail=f"No cart found for user with ID: {user_id}",
             )
 
         return cart
@@ -50,18 +54,18 @@ class CartCRUD(BaseCrud[Cart]):
         if cart.status == Status.closed:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail=f"The cart with ID: {cart.id} is closed"
+                detail=f"The cart with ID: {cart.id} is closed",
             )
 
-        return await self.update(cart.id, {"updated_by": user_id,
-                                           "status": Status.closed})
+        return await self.update(
+            cart.id, {"updated_by": user_id, "status": Status.closed}
+        )
 
     async def delete_cart(self, cart_id: int):
-
         deleted = await self.delete(cart_id)
         if deleted:
             return True
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error in deleted cart: {cart_id}"
+            detail=f"Error in deleted cart: {cart_id}",
         )

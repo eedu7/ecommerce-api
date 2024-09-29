@@ -26,6 +26,22 @@ class ProductCRUD(BaseCrud[Product]):
                 detail=str(e),
             )
 
+    async def get_by_id(self, product_id: int):
+        try:
+            product = await self.get_by_id(product_id=product_id)
+
+            if not product:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail="Product not found",
+                )
+            return product
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Error on fetching the product: {e}",
+            )
+
     async def create_product(self, attributes: dict[str, Any]) -> Product:
         try:
             product = await self.create(attributes)
@@ -46,7 +62,7 @@ class ProductCRUD(BaseCrud[Product]):
             )
 
     async def update_product(
-        self, product_id: int, attributes: dict[str, Any]
+            self, product_id: int, attributes: dict[str, Any]
     ) -> Product:
         try:
             updated_product = await self.update(product_id, attributes)

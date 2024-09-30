@@ -38,6 +38,11 @@ class BaseCrud(Generic[ModelType]):
             return None
         return model
 
+    async def get_all_by(self, field: str, value: Any) -> List[ModelType]:
+        query = select(self.model).where(getattr(self.model, field) == value)
+        result = await self.session.scalars(query)
+        return result.all()
+
     async def update(self, _id: int, attributes: dict[str, Any]) -> ModelType | None:
         model = await self.get_by(field="id", value=_id)
         if model is None:

@@ -9,3 +9,7 @@ class CartItem(BaseModel):
 
 class CartItemCreate(CartItem):
     pass
+
+
+class CartItemUpdate(BaseModel):
+    quantity: int

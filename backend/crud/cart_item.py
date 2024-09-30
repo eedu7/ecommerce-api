@@ -19,7 +19,7 @@ class CartItemCRUD(BaseCrud[CartItem]):
             )
 
     async def create_cart_item(
-        self, cart_id: int, product_id: int, user_id: int, quantity: int = 1
+            self, cart_id: int, product_id: int, user_id: int, quantity: int = 1
     ) -> CartItem:
         cart_item = await self.create(
             {
@@ -31,6 +31,22 @@ class CartItemCRUD(BaseCrud[CartItem]):
         )
         return cart_item
 
+    async def get_all_by_user(self, user_id: int) -> list[CartItem]:
+        try:
+            data = await self.get_all_by(field="created_by", value=user_id)
+            if not data:
+                raise HTTPException(
+                    status_code=status.HTTP_404_NOT_FOUND,
+                    detail=f"User does not have any cart items",
+                )
+            return data
+
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Error on fetching all cart items.",
+            )
+
     async def delete_cart_item(self, cart_item_id) -> bool:
         deleted = await self.delete(cart_item_id)
         if not deleted:
@@ -40,7 +56,7 @@ class CartItemCRUD(BaseCrud[CartItem]):
         return True
 
     async def update_cart_item(
-        self, cart_item_id: int, attributes: dict[str, any]
+            self, cart_item_id: int, attributes: dict[str, any]
     ) -> CartItem:
         try:
             return await self.update(cart_item_id, attributes)

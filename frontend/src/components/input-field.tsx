@@ -38,9 +38,9 @@ const InputField: React.FC<InputFieldProps> = ({
                     <Lock
                         className="size-5 absolute bottom-2 left-2 text-muted-foreground group-hover:text-black transition-all"/>
                     {showPassword ? <EyeIcon onClick={handleShowPassword}
-                                             className="absolute right-2 bottom-2 size-5 text-muted-foreground hover:text-black"/> :
+                                             className="absolute right-3 bottom-3 size-3 text-muted-foreground hover:text-black"/> :
                         <EyeClosedIcon onClick={handleShowPassword}
-                                       className="absolute right-2 bottom-2 size-5 text-muted-foreground  hover:text-black"/>}
+                                       className="absolute right-3 bottom-3 size-3 text-muted-foreground  hover:text-black"/>}
 
                 </div>
 
@@ -57,7 +57,7 @@ const InputField: React.FC<InputFieldProps> = ({
 
         case "user":
             return (<div className="relative group">
-                    <Input className="pl-8" type="email" required={required} placeholder={placeholder} {...field} />
+                    <Input className="pl-8" required={required} placeholder={placeholder} {...field} />
                     <User
                         className="size-5 absolute bottom-2 left-2 text-muted-foreground group-hover:text-black transition-all"/>
                 </div>

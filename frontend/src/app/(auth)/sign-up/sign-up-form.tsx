@@ -7,16 +7,25 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@
 import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
 import InputField from "@/components/input-field";
+import {userRegisterUser} from "@/features/auth/sign-up/use-register-user";
+import {Loader2} from "lucide-react";
+
 
 const SignInForm = () => {
     const form = useForm<z.infer<typeof signUpFormSchema>>({
         resolver: zodResolver(signUpFormSchema), defaultValues: {
-            email: "", password: "", name: "", confirmPassword: "",
+            email: " ", password: " ", name: " ", confirmPassword: "",
         }
     })
 
-    function onSubmit(values: z.infer<typeof signUpFormSchema>) {
-        console.log(values);
+    const registerUserMutation = userRegisterUser();
+
+
+    const onSubmit = (values: z.infer<typeof signUpFormSchema>) => {
+        const {name, email, password} = values;
+
+        registerUserMutation.mutate({name, email, password});
+
     }
 
 
@@ -67,7 +76,11 @@ const SignInForm = () => {
                     <FormMessage/>
                 </FormItem>)}/>
             <Separator/>
-            <Button type="submit" className="w-full">Submit</Button>
+            <Button type="submit" disabled={registerUserMutation.isPending} className="w-full">
+                {registerUserMutation.isPending ? <div className="flex gap-2 items-center" ><Loader2 className="animate-spin repeat-infinite" /> <span>Submitting...</span></div> : <span>Submit</span>
+
+                }
+            </Button>
 
         </form>
     </Form>)

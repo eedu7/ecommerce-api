@@ -9,14 +9,18 @@ import {Separator} from "@/components/ui/separator";
 import InputField from "@/components/input-field";
 import {userRegisterUser} from "@/features/auth/sign-up/use-register-user";
 import {Loader2} from "lucide-react";
+import {useToast} from "@/hooks/use-toast";
 
 
 const SignInForm = () => {
     const form = useForm<z.infer<typeof signUpFormSchema>>({
         resolver: zodResolver(signUpFormSchema), defaultValues: {
-            email: " ", password: " ", name: " ", confirmPassword: "",
+            email: "", password: "", name: "", confirmPassword: "",
         }
     })
+
+
+    const {toast} = useToast();
 
     const registerUserMutation = userRegisterUser();
 
@@ -25,6 +29,13 @@ const SignInForm = () => {
         const {name, email, password} = values;
 
         registerUserMutation.mutate({name, email, password});
+
+        if (registerUserMutation.error) {
+            toast({
+                variant: "destructive",
+                title: `${registerUserMutation.error.response.data.detail}`,
+            })
+        }
 
     }
 
@@ -77,9 +88,9 @@ const SignInForm = () => {
                 </FormItem>)}/>
             <Separator/>
             <Button type="submit" disabled={registerUserMutation.isPending} className="w-full">
-                {registerUserMutation.isPending ? <div className="flex gap-2 items-center" ><Loader2 className="animate-spin repeat-infinite" /> <span>Submitting...</span></div> : <span>Submit</span>
-
-                }
+                {registerUserMutation.isPending ?
+                    <div className="flex gap-2 items-center"><Loader2 className="animate-spin repeat-infinite"/>
+                        <span>Submitting...</span></div> : <span>Submit</span>}
             </Button>
 
         </form>

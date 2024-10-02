@@ -7,6 +7,9 @@ import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "@
 import {Button} from "@/components/ui/button";
 import {Separator} from "@/components/ui/separator";
 import InputField from "@/components/input-field";
+import {useLoginUser} from "@/features/auth/sign-in/use-login-user";
+import {Loader2} from "lucide-react";
+import {useToast} from "@/hooks/use-toast";
 
 const SignInForm = () => {
     const form = useForm<z.infer<typeof signInFormSchema>>({
@@ -15,8 +18,19 @@ const SignInForm = () => {
         }
     })
 
+
+    const loginUserMutation = useLoginUser();
+    const {toast} = useToast();
     function onSubmit(values: z.infer<typeof signInFormSchema>) {
-        console.log(values);
+        loginUserMutation.mutate(values);
+
+        if (loginUserMutation.error) {
+            toast({
+                variant: "destructive",
+                title: "Invalid Credentials"
+            })
+        }
+
     }
 
 
@@ -44,7 +58,11 @@ const SignInForm = () => {
                     <FormMessage/>
                 </FormItem>)}/>
             <Separator/>
-            <Button type="submit" className="w-full">Submit</Button>
+            <Button type="submit" disabled={loginUserMutation.isPending} className="w-full">
+                {loginUserMutation.isPending ?
+                    <div className="flex gap-2 items-center"><Loader2 className="animate-spin repeat-infinite"/>
+                        <span>Logging...</span></div> : <span>Log In</span>}
+            </Button>
 
         </form>
     </Form>)

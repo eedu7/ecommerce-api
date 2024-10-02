@@ -32,11 +32,9 @@ const SignInForm = () => {
 
         if (registerUserMutation.error) {
             toast({
-                variant: "destructive",
-                title: `${registerUserMutation.error.response.data.detail}`,
+                variant: "destructive", title: "Invalid credentials",
             })
         }
-
     }
 
 

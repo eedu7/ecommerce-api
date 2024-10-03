@@ -9,7 +9,6 @@ import {Separator} from "@/components/ui/separator";
 import InputField from "@/components/input-field";
 import {useLoginUser} from "@/features/auth/sign-in/use-login-user";
 import {Loader2} from "lucide-react";
-import {useToast} from "@/hooks/use-toast";
 
 const SignInForm = () => {
     const form = useForm<z.infer<typeof signInFormSchema>>({
@@ -20,16 +19,9 @@ const SignInForm = () => {
 
 
     const loginUserMutation = useLoginUser();
-    const {toast} = useToast();
+
     function onSubmit(values: z.infer<typeof signInFormSchema>) {
         loginUserMutation.mutate(values);
-
-        if (loginUserMutation.error) {
-            toast({
-                variant: "destructive",
-                title: "Invalid Credentials"
-            })
-        }
 
     }
 

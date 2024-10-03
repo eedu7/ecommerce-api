@@ -30,11 +30,6 @@ const SignInForm = () => {
 
         registerUserMutation.mutate({name, email, password});
 
-        if (registerUserMutation.error) {
-            toast({
-                variant: "destructive", title: "Invalid credentials",
-            })
-        }
     }
 
 

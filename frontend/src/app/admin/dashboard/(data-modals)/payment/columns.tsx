@@ -40,7 +40,7 @@ export const columns: ColumnDef<Payment>[] = [{
         return <div className="text-right font-medium">{formatted}</div>
     }
 }, {
-    id: "actions", cell: ({row}) => {
+    id: "actions", cell: () => {
 
         return (<div className="flex justify-end"><DropdownMenu>
             <DropdownMenuTrigger asChild>

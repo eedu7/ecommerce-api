@@ -17,6 +17,7 @@ import {Button} from "@/components/ui/button";
 
 import React from "react";
 import {Input} from "@/components/ui/input";
+import {Plus} from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -46,16 +47,18 @@ export function DataTable<TData, TValue>({
     })
 
     return (<div>
-            <div className="flex items-center py-4">
+            <div className="flex items-center py-4 justify-between">
                 <Input
                     placeholder="Filter name..."
                     value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
                     onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
                     className="max-w-sm"
                 />
+                <Button>
+                    <Plus className="size-4" /> Add
+                </Button>
             </div>
-
-
+            {/*TODO: This may be duplicated in all data tables, we should make it resuable*/}
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>
@@ -106,8 +109,6 @@ export function DataTable<TData, TValue>({
                     Next
                 </Button>
             </div>
-
         </div>
-
     )
 }

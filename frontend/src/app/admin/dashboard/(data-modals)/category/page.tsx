@@ -5,7 +5,7 @@ import {DataTable} from "@/app/admin/dashboard/(data-modals)/category/data-table
 async function getData(): Promise<Category[]> {
     // Fetch data from your API here.
     return [{
-        "id": 1,  "name": "Electronics", "description": "Devices and gadgets like smartphones, laptops, and cameras."
+        "id": 1, "name": "Electronics", "description": "Devices and gadgets like smartphones, laptops, and cameras."
     }, {
         "id": 2, "name": "Fashion", "description": "Clothing, accessories, and footwear for men, women, and children."
     }, {

@@ -93,7 +93,7 @@ const DashboardSidebar = () => {
                 <span>Connect Now</span>
             </Button>
         </div>
-        <div className="absolute bottom-4">
+        <div>
             <p className="text-sm text-muted-foreground">Terms & Services</p>
             <p className="text-sm text-muted-foreground">Privacy Policy</p>
         </div>

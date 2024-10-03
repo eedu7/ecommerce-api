@@ -41,7 +41,6 @@ export const columns: ColumnDef<Payment>[] = [{
     }
 }, {
     id: "actions", cell: ({row}) => {
-        const payment = row.original
 
         return (<div className="flex justify-end"><DropdownMenu>
             <DropdownMenuTrigger asChild>

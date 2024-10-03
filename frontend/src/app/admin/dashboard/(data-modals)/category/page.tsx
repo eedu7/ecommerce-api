@@ -1,6 +1,6 @@
-import React from 'react'
 import {Category, columns} from "@/app/admin/dashboard/(data-modals)/category/columns";
 import {DataTable} from "@/app/admin/dashboard/(data-modals)/category/data-table";
+import Cookies from "js-cookie";
 
 async function getData(): Promise<Category[]> {
     // Fetch data from your API here.
@@ -19,8 +19,8 @@ async function getData(): Promise<Category[]> {
 
 
 const CategoryPage = async () => {
-
     const data = await getData();
+
     return (<div className="container mx-auto">
         <DataTable columns={columns} data={data}/>
     </div>)

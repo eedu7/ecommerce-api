@@ -10,7 +10,7 @@ export const useLoginUser = () => {
     // @ts-ignore
     return useMutation({
         mutationFn: loginUser, onSuccess: (data) => {
-            Cookie.set("token", JSON.stringify(data));
+            Cookie.set("token", data.access_token);
             router.push("/admin/dashboard");
 
         }, onError: () => {

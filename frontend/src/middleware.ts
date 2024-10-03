@@ -4,6 +4,7 @@ import {NextResponse} from 'next/server';
 export function middleware(req: NextRequest) {
     const {pathname} = req.nextUrl;
 
+
     if (pathname.startsWith('/admin')) {
         const authToken = req.cookies.get('token');
 

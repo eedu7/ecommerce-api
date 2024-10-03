@@ -1,8 +1,8 @@
-"""Initial Migrations
+"""Initial Migration
 
-Revision ID: 6e486a09c76f
+Revision ID: 28016a291046
 Revises: 
-Create Date: 2024-09-28 10:53:35.901034
+Create Date: 2024-09-30 11:05:27.261028
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '6e486a09c76f'
+revision: str = '28016a291046'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -63,6 +63,20 @@ def upgrade() -> None:
     op.create_index(op.f('ix_category_created_at'), 'category', ['created_at'], unique=False)
     op.create_index(op.f('ix_category_id'), 'category', ['id'], unique=False)
     op.create_index(op.f('ix_category_name'), 'category', ['name'], unique=True)
+    op.create_table('payment',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('cart_id', sa.Integer(), nullable=False),
+    sa.Column('amount', sa.DECIMAL(), nullable=False),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.Column('updated_by', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.ForeignKeyConstraint(['cart_id'], ['cart.id'], ),
+    sa.ForeignKeyConstraint(['created_by'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['updated_by'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_payment_created_at'), 'payment', ['created_at'], unique=False)
     op.create_table('product',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('name', sa.String(length=255), nullable=False),
@@ -87,8 +101,12 @@ def upgrade() -> None:
     sa.Column('quantity', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.Column('created_by', sa.Integer(), nullable=True),
+    sa.Column('updated_by', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['cart_id'], ['cart.id'], ),
+    sa.ForeignKeyConstraint(['created_by'], ['users.id'], ),
     sa.ForeignKeyConstraint(['product_id'], ['product.id'], ),
+    sa.ForeignKeyConstraint(['updated_by'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_cart_item_created_at'), 'cart_item', ['created_at'], unique=False)
@@ -101,6 +119,8 @@ def downgrade() -> None:
     op.drop_table('cart_item')
     op.drop_index(op.f('ix_product_created_at'), table_name='product')
     op.drop_table('product')
+    op.drop_index(op.f('ix_payment_created_at'), table_name='payment')
+    op.drop_table('payment')
     op.drop_index(op.f('ix_category_name'), table_name='category')
     op.drop_index(op.f('ix_category_id'), table_name='category')
     op.drop_index(op.f('ix_category_created_at'), table_name='category')

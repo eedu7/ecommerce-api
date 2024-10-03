@@ -20,7 +20,7 @@ async function getData(): Promise<Payment[]> {
 const PaymentPage = async () => {
 
     const data = await getData();
-    return (<div className="container mx-auto py-10">
+    return (<div className="container mx-auto">
         <DataTable columns={columns} data={data}/>
     </div>)
 }

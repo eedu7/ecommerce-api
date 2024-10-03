@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const DashboardHeader = () => {
-    return (<header className="flex items-center justify-between mt-4 px-2">
+    return (<header className="flex items-center justify-between mt-4">
         <div>
             Dashboard
         </div>

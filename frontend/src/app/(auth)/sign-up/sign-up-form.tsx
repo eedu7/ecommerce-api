@@ -9,7 +9,6 @@ import {Separator} from "@/components/ui/separator";
 import InputField from "@/components/input-field";
 import {userRegisterUser} from "@/features/auth/sign-up/use-register-user";
 import {Loader2} from "lucide-react";
-import {useToast} from "@/hooks/use-toast";
 
 
 const SignInForm = () => {
@@ -19,8 +18,6 @@ const SignInForm = () => {
         }
     })
 
-
-    const {toast} = useToast();
 
     const registerUserMutation = userRegisterUser();
 

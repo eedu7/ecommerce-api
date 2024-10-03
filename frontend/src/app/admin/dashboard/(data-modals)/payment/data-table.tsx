@@ -4,7 +4,8 @@ import {
     ColumnDef,
     ColumnFiltersState,
     flexRender,
-    getCoreRowModel, getFilteredRowModel,
+    getCoreRowModel,
+    getFilteredRowModel,
     getPaginationRowModel,
     getSortedRowModel,
     SortingState,
@@ -27,6 +28,8 @@ export function DataTable<TData, TValue>({
                                          }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+    const [rowSelection, setRowSelection] = React.useState({})
+
     const table = useReactTable({
         data,
         columns,
@@ -36,8 +39,9 @@ export function DataTable<TData, TValue>({
         onColumnFiltersChange: setColumnFilters,
         getFilteredRowModel: getFilteredRowModel(),
         getSortedRowModel: getSortedRowModel(),
+        onRowSelectionChange: setRowSelection,
         state: {
-            sorting, columnFilters,
+            sorting, columnFilters, rowSelection
         }
     })
 
@@ -78,6 +82,11 @@ export function DataTable<TData, TValue>({
                     </TableBody>
                 </Table>
             </div>
+            <div className="flex-1 text-sm text-muted-foreground">
+                {table.getFilteredSelectedRowModel().rows.length} of{" "}
+                {table.getFilteredRowModel().rows.length} row(s) selected.
+            </div>
+
             <div className="flex items-center justify-end space-x-2 py-4">
                 <Button
                     variant="outline"
@@ -96,6 +105,7 @@ export function DataTable<TData, TValue>({
                     Next
                 </Button>
             </div>
+
         </div>
 
     )

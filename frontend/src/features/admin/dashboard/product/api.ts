@@ -13,17 +13,12 @@ const getAuthHeader = () => {
 
 
 export const getAllProducts = async (): Promise<ProductResponse[]> => {
-
     const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_API_URL}/product`,);
-    console.log("$$$$$$$$$$$$$");
-    console.log("$$$$$$$$$$$$$");
-    console.log("$$$$$$$$$$$$$");
-    console.log("$$$$$$$$$$$$$");
-    console.log(response.data);
-    console.log("$$$$$$$$$$$$$");
-    console.log("$$$$$$$$$$$$$");
-    console.log("$$$$$$$$$$$$$");
-    console.log("$$$$$$$$$$$$$");
     return response.data;
+}
 
+
+export const createProduct = async (data: CreateProductData): Promise<ProductResponse> => {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_API_URL}/product`, data, getAuthHeader());
+    return response.data;
 }

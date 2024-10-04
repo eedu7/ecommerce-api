@@ -17,6 +17,7 @@ import {Button} from "@/components/ui/button";
 
 import React from "react";
 import {Input} from "@/components/ui/input";
+import {CreateProductForm} from "@/features/admin/dashboard/product/components/create-product-form";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -46,13 +47,14 @@ export function DataTable<TData, TValue>({
     })
 
     return (<div>
-            <div className="flex items-center py-4">
+            <div className="flex items-center py-4 justify-between">
                 <Input
-                    placeholder="Filter name..."
+                    placeholder="Filter names...."
                     value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
                     onChange={(event) => table.getColumn("name")?.setFilterValue(event.target.value)}
                     className="max-w-sm"
                 />
+                <CreateProductForm />
             </div>
 
             <div className="rounded-md border">

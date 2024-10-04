@@ -30,6 +30,7 @@ export const EditCategoryForm: React.FC<EditCategoryDialogProps> = ({open, onOpe
             id: id, name: updatedName, description: updatedDescription
         };
         useEditCategoryMutation.mutate(data);
+        onOpenChange(false);
     }
 
 

@@ -1,7 +1,7 @@
 "use client"
 
 import {ColumnDef} from "@tanstack/react-table"
-import {ArrowUpDown, MoreHorizontal} from "lucide-react"
+import {ArrowUpDown, Edit, MoreHorizontal, Trash} from "lucide-react"
 
 import {Button} from "@/components/ui/button"
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
@@ -59,13 +59,20 @@ export const columns: ColumnDef<Category>[] = [{
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuItem className="space-x-2 flex items-center"
-                                          onClick={() => setDeleteDialogOpen(true)}>
-                            Delete
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="space-x-2 flex items-center"
                                           onClick={() => setEditDialogOpen(true)}>
-                            Edit
+                            <div className="space-x-1 flex items-center text-sky-300 hover:text-sky-800">
+                                <Edit className="size-4"/>
+                                <span>Edit</span>
+                            </div>
                         </DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={() => setDeleteDialogOpen(true)}>
+                            <div className="space-x-1 flex items-center text-rose-500 hover:text-rose-800">
+                                <Trash className="size-4"/>
+                                <span>Delete</span>
+                            </div>
+                        </DropdownMenuItem>
+
                     </DropdownMenuContent>
                 </DropdownMenu>
 

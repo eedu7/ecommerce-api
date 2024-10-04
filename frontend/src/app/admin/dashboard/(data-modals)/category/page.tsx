@@ -7,7 +7,6 @@ const CategoryPage = () => {
 
     const {data} = useGetAllCategories();
 
-
     return (<div className="container mx-auto">
         <DataTable columns={columns} data={data || []}/>
     </div>)

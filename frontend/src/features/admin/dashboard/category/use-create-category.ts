@@ -1,8 +1,10 @@
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {useToast} from "@/hooks/use-toast";
 import {createCategory} from "@/features/admin/dashboard/category/api";
 
+
 export const useCreateCategory = () => {
+    const queryClient = useQueryClient();
     const {toast} = useToast();
     // @ts-ignore
     return useMutation({

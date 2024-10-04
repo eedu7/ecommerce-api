@@ -23,6 +23,7 @@ export const DeleteCategoryDialog: React.FC<DeleteCategoryDialogProps> = ({open,
     const useDeleteCategoryMutation = useDeleteCategory();
 
     const handleDelete = () => {
+        useDeleteCategoryMutation.mutate({id});
     }
 
 
@@ -38,7 +39,7 @@ export const DeleteCategoryDialog: React.FC<DeleteCategoryDialogProps> = ({open,
             </AlertDialogHeader>
             <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction>Continue</AlertDialogAction>
+                <AlertDialogAction onClick={handleDelete}>Delete</AlertDialogAction>
             </AlertDialogFooter>
         </AlertDialogContent>
     </AlertDialog>)

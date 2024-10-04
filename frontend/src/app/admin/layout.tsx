@@ -18,7 +18,7 @@ export default function Layout({
                     <DashboardSidebar/>
                 </aside>
                 <section className="col-span-11 lg:col-span-7 flex flex-col space-y-4 px-4 mt-4">
-                    <DashboardHeader />
+                    <DashboardHeader/>
                     {children}
                 </section>
             </main>

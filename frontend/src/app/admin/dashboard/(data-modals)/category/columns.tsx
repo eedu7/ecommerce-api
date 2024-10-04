@@ -1,11 +1,14 @@
 "use client"
 
 import {ColumnDef} from "@tanstack/react-table"
-import {ArrowUpDown, Edit, MoreHorizontal, Trash} from "lucide-react"
+import {ArrowUpDown, MoreHorizontal} from "lucide-react"
 
 import {Button} from "@/components/ui/button"
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
 import {Checkbox} from "@/components/ui/checkbox";
+import React, {useState} from "react";
+import {DeleteCategoryDialog} from "@/features/admin/dashboard/category/components/delete-category-dialog";
+import {EditCategoryForm} from "@/features/admin/dashboard/category/components/edit-category-dialog";
 
 export type Category = {
     id: number
@@ -38,21 +41,41 @@ export const columns: ColumnDef<Category>[] = [{
     {
         accessorKey: "description", header: "Description"
     }, {
-        id: "actions", cell: () => {
+        id: "actions", cell: ({row}) => {
 
-            return (<div className="flex justify-end"><DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="h-8 w-8 p-0">
-                        <span className="sr-only">Open menu</span>
-                        <MoreHorizontal className="h-4 w-4"/>
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                    <DropdownMenuItem className="space-x-2 flex items-center"><Edit className="size-4"/>
-                        <span>Edit</span></DropdownMenuItem>
-                    <DropdownMenuItem className="space-x-2 flex items-center"><Trash className="size-4"/>
-                        <span>Delete</span></DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu></div>)
+            const category = row.original;
+
+            const [isDeleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
+            const [isEditDialogOpen, setEditDialogOpen] = useState<boolean>(false);
+
+
+            return (<div className="flex justify-end">
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                            <span className="sr-only">Open menu</span>
+                            <MoreHorizontal className="h-4 w-4"/>
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuItem className="space-x-2 flex items-center"
+                                          onClick={() => setDeleteDialogOpen(true)}>
+                            Delete
+                        </DropdownMenuItem>
+                        <DropdownMenuItem className="space-x-2 flex items-center"
+                                          onClick={() => setEditDialogOpen(true)}>
+                            Edit
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Delete Dialog */}
+                <DeleteCategoryDialog open={isDeleteDialogOpen} onOpenChange={setDeleteDialogOpen} id={category.id}/>
+
+                {/*  Edit Form  */}
+                <EditCategoryForm open={isEditDialogOpen} onOpenChange={setEditDialogOpen}
+                                  id={category.id} description={category.description} name={category.name}
+                />
+            </div>)
         },
     },]

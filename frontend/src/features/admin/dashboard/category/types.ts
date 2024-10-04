@@ -15,3 +15,6 @@ type GetCategoryData = {
 }
 
 
+type EditCategoryData = {
+    id: number, name: string; description: string;
+}

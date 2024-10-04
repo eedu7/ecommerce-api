@@ -14,29 +14,17 @@ export type Payment = {
     email: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },{
+export const columns: ColumnDef<Payment>[] = [{
+    id: "select", header: ({table}) => (<Checkbox
+            checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && "indeterminate")}
+            onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+            aria-label="Select all"
+        />), cell: ({row}) => (<Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+        />), enableSorting: false, enableHiding: false,
+}, {
     accessorKey: "status", header: "Status", cell: ({row}) => {
         const value: string = row.getValue("status");
         const titleCaseValue: string = value.charAt(0).toUpperCase() + value.slice(1);
@@ -55,12 +43,12 @@ export const columns: ColumnDef<Payment>[] = [
 }, {
     accessorKey: "email", header: ({column}) => {
         return (<Button
-                variant="ghost"
-                onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-            >
-                Email
-                <ArrowUpDown className="ml-2 h-4 w-4"/>
-            </Button>)
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+            Email
+            <ArrowUpDown className="ml-2 h-4 w-4"/>
+        </Button>)
     },
 }, {
     accessorKey: "amount", header: () => <div className="text-right">Amount</div>, cell: ({row}) => {
@@ -72,6 +60,7 @@ export const columns: ColumnDef<Payment>[] = [
     }
 }, {
     id: "actions", cell: () => {
+
 
         return (<div className="flex justify-end"><DropdownMenu>
             <DropdownMenuTrigger asChild>

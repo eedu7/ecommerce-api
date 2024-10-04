@@ -65,5 +65,4 @@ class PaymentCRUD(BaseCrud[Payment]):
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail=f"Error on deleting payment data.",
-
             )

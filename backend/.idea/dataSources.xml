@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="fastapi_db@localhost" uuid="d2a43dc8-b30e-444d-ac63-d11dfc453dd8">
+    <data-source source="LOCAL" name="fastapi_db@localhost" uuid="bfa65b45-f2c0-49cb-9185-60b2eb4d4e45">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>

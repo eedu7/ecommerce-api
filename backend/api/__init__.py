@@ -1,9 +1,8 @@
-from fastapi import Depends, FastAPI, Request, status
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 
-from dependencies.authentication import AuthenticationRequired
 from middlewares.authentication import AuthBackend, AuthenticationMiddlewares
+
 from .cart import router as cart_router
 from .cart_item import router as cart_item_router
 from .category import router as category_router
@@ -22,17 +21,6 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
 )
-
-
-@app.get("/", dependencies=[Depends(AuthenticationRequired)])
-async def root(request: Request):
-    try:
-        user_id = request.user.id
-        return {"message": f"Welcome User with ID: {user_id}"}
-    except Exception as e:
-        return JSONResponse(
-            status_code=status.HTTP_200_OK, content={"message": f"Ecommerce API: {e}"}
-        )
 
 
 app.include_router(user_router, prefix="/users", tags=["User"])

@@ -4,7 +4,7 @@ from pydantic import BaseModel, EmailStr, Field
 
 
 class UserBase(BaseModel):
-    email: EmailStr = Field(..., examples=["john.doe@exampl.com", "<EMAIL>"])
+    email: EmailStr = Field(..., examples=["john.doe@example.com", "<EMAIL>"])
 
 
 class RegisterUser(UserBase):

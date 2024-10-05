@@ -23,8 +23,8 @@ export const createProduct = async (data: CreateProductData): Promise<ProductRes
 }
 
 export const deleteProduct = async (data: DeleteProductData) => {
-    const response = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_API_URL}/product/${data.id}`, getAuthHeader());
-    return response.data;
+        const response = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_API_URL}/product/${data.id}`, getAuthHeader());
+        return response.data;
 }
 
 

@@ -9,6 +9,7 @@ const ProductPage = () => {
 
     const {data} = useGetAllProducts();
 
+
     return (<div className="container mx-auto">
         <DataTable columns={columns} data={data || []}/>
     </div>)

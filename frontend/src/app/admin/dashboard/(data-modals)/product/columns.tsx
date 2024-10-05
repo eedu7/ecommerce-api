@@ -6,6 +6,9 @@ import {ArrowUpDown, Edit, MoreHorizontal, Trash} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
 import {Checkbox} from "@/components/ui/checkbox";
+import {useState} from "react";
+import {EditProductForm} from "@/features/admin/dashboard/product/components/edit-category-form";
+import {DeleteProductDialog} from "@/features/admin/dashboard/product/components/delete-product-form";
 
 export type Product = {
     id: number
@@ -45,8 +48,8 @@ export const columns: ColumnDef<Product>[] = [{
 }, {
     accessorKey: "category", header: "Category", cell: ({row}) => {
         const product = row.original;
-        const {name} = product.category;
-        return (<div>{name}</div>)
+        const category = product.category;
+        return (<div>{category?.name ?? "No category"}</div>)
     }
 }, {
     accessorKey: "price", header: ({column}) => {
@@ -67,8 +70,12 @@ export const columns: ColumnDef<Product>[] = [{
 }, {
     accessorKey: "stock_quantity", header: "Stock"
 }, {
-    id: "actions", cell: () => {
+    id: "actions", cell: ({row}) => {
 
+        const product = row.original;
+
+        const [isEditDialogOpen, setEditDialogOpen] = useState<boolean>(false);
+        const [isDeleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
 
         return (<div className="flex justify-end"><DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -78,11 +85,27 @@ export const columns: ColumnDef<Product>[] = [{
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuItem className="space-x-2 flex items-center"><Edit className="size-4"/>
+
+                <DropdownMenuItem className="space-x-2 flex items-center" onClick={() => setEditDialogOpen(true)}><Edit
+                    className="size-4"/>
                     <span>Edit</span></DropdownMenuItem>
-                <DropdownMenuItem className="space-x-2 flex items-center"><Trash className="size-4"/>
-                    <span>Delete</span></DropdownMenuItem>
+                <DropdownMenuItem
+                    className="space-x-2 flex items-center"
+                    onClick={() => setDeleteDialogOpen(true)} // Move the onClick here
+                >
+                    <Trash className="size-4"/>
+                    <span>Delete</span>
+                </DropdownMenuItem>
             </DropdownMenuContent>
-        </DropdownMenu></div>)
+        </DropdownMenu>
+
+            {/* Edit Dialog*/}
+            <EditProductForm id={product.id} open={isEditDialogOpen} onOpenChange={setEditDialogOpen}
+                             product={product}/>
+            {/* Delete Dialog*/}
+            <DeleteProductDialog id={product.id} open={isDeleteDialogOpen} onOpenChange={setDeleteDialogOpen}/>
+
+
+        </div>)
     },
 },]

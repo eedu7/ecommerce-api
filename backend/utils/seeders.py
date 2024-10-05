@@ -4,6 +4,7 @@ from pathlib import Path
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from models import Category, Product, User
+from utils.password_handler import get_password_hash
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -15,11 +16,12 @@ async def seed_users(db: AsyncSession):
         users = json.load(file)
 
     for user in users:
+
         db_user = User(
             id=user["id"],
             name=user["name"],
             email=user["email"],
-            password=user["password"],
+            password=get_password_hash(user["password"]),
             is_active=user["is_active"],
             is_superuser=user["is_superuser"],
             is_staff=user["is_staff"],

@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Depends, status
+
+from fastapi import APIRouter, Depends, status, HTTPException
 
 from crud.category import CategoryCRUD
 from crud.product import ProductCRUD
@@ -22,7 +23,6 @@ async def get_all_products(
     data = []
     for product in products:
         category: Category = await category_crud.get_by_id(int(product.category_id))
-        print(category)
         new_data = {
             "id": product.id,
             "name": product.name,
@@ -74,8 +74,16 @@ async def update_product(
     )
 
 
-@router.delete("/{product_id}")
+@router.delete("/{product_id}", dependencies=[Depends(AuthenticationRequired)])
 async def delete_product(
     product_id: int, product_crud: ProductCRUD = Depends(get_product_crud)
 ):
-    return await product_crud.delete_product(product_id)
+    deleted =  await product_crud.delete_product(product_id)
+    if not deleted:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Error on deleting product"
+        )
+    return {
+        "detail": "Product deleted successfully"
+    }

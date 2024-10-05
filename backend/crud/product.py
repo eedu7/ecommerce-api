@@ -81,7 +81,7 @@ class ProductCRUD(BaseCrud[Product]):
 
     async def delete_product(self, product_id: int) -> bool:
         try:
-            deleted = await self.get_by_id(product_id)
+            deleted = await self.delete(product_id)
             if deleted:
                 return True
             raise HTTPException(

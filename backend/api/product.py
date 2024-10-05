@@ -4,7 +4,7 @@ from crud.category import CategoryCRUD
 from crud.product import ProductCRUD
 from dependencies.authentication import AuthenticationRequired
 from dependencies.get_user import get_current_user
-from dependencies.models import get_product_crud
+from dependencies.models import get_product_crud, get_categories_crud
 from models import Category, User
 from schemas.products import ProductCreate, ProductPartialUpdate, ProductUpdate
 
@@ -16,12 +16,13 @@ async def get_all_products(
     skip: int = 0,
     limit: int = 100,
     product_crud: ProductCRUD = Depends(get_product_crud),
-    category_crud: CategoryCRUD = Depends(get_product_crud),
+    category_crud: CategoryCRUD = Depends(get_categories_crud),
 ):
     products = await product_crud.get_all_products(skip=skip, limit=limit)
     data = []
     for product in products:
         category: Category = await category_crud.get_by_id(int(product.category_id))
+        print(category)
         new_data = {
             "id": product.id,
             "name": product.name,

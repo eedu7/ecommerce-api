@@ -13,10 +13,10 @@ router = APIRouter()
 
 @router.get("/")
 async def get_all_products(
-        skip: int = 0,
-        limit: int = 100,
-        product_crud: ProductCRUD = Depends(get_product_crud),
-        category_crud: CategoryCRUD = Depends(get_product_crud),
+    skip: int = 0,
+    limit: int = 100,
+    product_crud: ProductCRUD = Depends(get_product_crud),
+    category_crud: CategoryCRUD = Depends(get_product_crud),
 ):
     products = await product_crud.get_all_products(skip=skip, limit=limit)
     data = []
@@ -43,9 +43,9 @@ async def get_all_products(
     status_code=status.HTTP_201_CREATED,
 )
 async def create_product(
-        product: ProductCreate,
-        user: User = Depends(get_current_user),
-        product_crud: ProductCRUD = Depends(get_product_crud),
+    product: ProductCreate,
+    user: User = Depends(get_current_user),
+    product_crud: ProductCRUD = Depends(get_product_crud),
 ):
     data = product.model_dump()
     data["created_by"] = user.id
@@ -54,9 +54,9 @@ async def create_product(
 
 @router.put("/{product_id}", dependencies=[Depends(AuthenticationRequired)])
 async def update_product(
-        product_id: int,
-        product: ProductUpdate,
-        product_crud: ProductCRUD = Depends(get_product_crud),
+    product_id: int,
+    product: ProductUpdate,
+    product_crud: ProductCRUD = Depends(get_product_crud),
 ):
     data = product.model_dump(exclude_none=True)
     return await product_crud.update_product(product_id, data)
@@ -64,9 +64,9 @@ async def update_product(
 
 @router.patch("/{product_id}")
 async def update_product(
-        product_id: int,
-        product: ProductPartialUpdate,
-        product_crud: ProductCRUD = Depends(get_product_crud),
+    product_id: int,
+    product: ProductPartialUpdate,
+    product_crud: ProductCRUD = Depends(get_product_crud),
 ):
     return await product_crud.update_product(
         product_id, product.model_dump(exclude_none=True)
@@ -75,6 +75,6 @@ async def update_product(
 
 @router.delete("/{product_id}")
 async def delete_product(
-        product_id: int, product_crud: ProductCRUD = Depends(get_product_crud)
+    product_id: int, product_crud: ProductCRUD = Depends(get_product_crud)
 ):
     return await product_crud.delete_product(product_id)

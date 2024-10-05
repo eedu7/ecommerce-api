@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "name": "admin",
+    "email": "admin@example.com",
+    "password": "password123",
+    "is_active": true,
+    "is_staff": true,
+    "is_superuser": true,
+    "is_admin": true
+
+  }
+]

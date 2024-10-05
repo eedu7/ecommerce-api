@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "name": "Electronics",
+    "description": "Devices, gadgets, and accessories.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 2,
+    "name": "Clothing",
+    "description": "Men's, women's, and children's clothing.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 3,
+    "name": "Home Appliances",
+    "description": "Appliances for home use like refrigerators, washing machines, etc.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 4,
+    "name": "Furniture",
+    "description": "Home and office furniture.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 5,
+    "name": "Books",
+    "description": "A wide variety of books across different genres.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 6,
+    "name": "Beauty & Personal Care",
+    "description": "Cosmetics, skincare, and grooming products.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 7,
+    "name": "Toys",
+    "description": "Toys for children of all ages.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 8,
+    "name": "Sports & Outdoors",
+    "description": "Sporting goods and outdoor equipment.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 9,
+    "name": "Groceries",
+    "description": "Daily groceries and food items.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 10,
+    "name": "Health & Wellness",
+    "description": "Healthcare products and fitness equipment.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 11,
+    "name": "Automotive",
+    "description": "Car accessories and parts.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 12,
+    "name": "Pet Supplies",
+    "description": "Food, toys, and other supplies for pets.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 13,
+    "name": "Jewelry & Watches",
+    "description": "Fine jewelry, fashion jewelry, and watches.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 14,
+    "name": "Office Supplies",
+    "description": "Office equipment, stationery, and supplies.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 15,
+    "name": "Gaming",
+    "description": "Video games, consoles, and accessories.",
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 16,
+    "name": "Musical Instruments",
+    "description": "Instruments and music accessories.",
+    "created_by": 1,
+    "updated_by": 1
+  }
+]

@@ -6,7 +6,7 @@ import {ArrowUpDown, Edit, MoreHorizontal, Trash} from "lucide-react"
 import {Button} from "@/components/ui/button"
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
 import {Checkbox} from "@/components/ui/checkbox";
-import {useState} from "react";
+import React, {useState} from "react";
 import {EditProductForm} from "@/features/admin/dashboard/product/components/edit-category-form";
 import {DeleteProductDialog} from "@/features/admin/dashboard/product/components/delete-product-form";
 
@@ -86,15 +86,20 @@ export const columns: ColumnDef<Product>[] = [{
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
 
-                <DropdownMenuItem className="space-x-2 flex items-center" onClick={() => setEditDialogOpen(true)}><Edit
-                    className="size-4"/>
-                    <span>Edit</span></DropdownMenuItem>
+                <DropdownMenuItem className="space-x-2 flex items-center" onClick={() => setEditDialogOpen(true)}>
+                    <div className="space-x-1 flex items-center text-sky-300 hover:text-sky-800">
+                        <Edit className="size-4"/>
+                        <span>Edit</span>
+                    </div>
+                </DropdownMenuItem>
                 <DropdownMenuItem
                     className="space-x-2 flex items-center"
                     onClick={() => setDeleteDialogOpen(true)} // Move the onClick here
                 >
-                    <Trash className="size-4"/>
-                    <span>Delete</span>
+                    <div className="space-x-1 flex items-center text-rose-500 hover:text-rose-800">
+                        <Trash className="size-4"/>
+                        <span>Delete</span>
+                    </div>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

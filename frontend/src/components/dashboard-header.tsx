@@ -5,10 +5,52 @@ import {
     DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 
+import {
+    Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import {usePathname} from "next/navigation";
+
+const links_paths = {
+    "/admin/dashboard/product": {
+        "name": "Product",
+    }, "/admin/dashboard/category": {
+        name: "Category",
+    }, "/admin/dashboard": {
+        name: "Dashboard"
+    }, "/admin/dashboard/user": {
+        name: "User",
+    }, "/admin/dashboard/payment": {
+        name: "Payment",
+    }
+}
+
+
 const DashboardHeader = () => {
+
+    const pathname = usePathname();
+    const isRootDashboard = pathname === "/admin/dashboard";
+    const currentLink = links_paths[pathname];
+
+
     return (<header className="flex items-center justify-between mt-4">
         <div>
-            Dashboard
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/admin/dashboard">Dashboard</BreadcrumbLink>
+                    </BreadcrumbItem>
+
+                    {!isRootDashboard && currentLink && (<BreadcrumbSeparator/>)}
+
+                    {!isRootDashboard && currentLink && (<BreadcrumbItem>
+                            <BreadcrumbLink href={pathname}>
+                                {currentLink.name}
+                            </BreadcrumbLink>
+                        </BreadcrumbItem>
+
+                    )}
+                </BreadcrumbList>
+            </Breadcrumb>
         </div>
         <div>
             <DropdownMenu>

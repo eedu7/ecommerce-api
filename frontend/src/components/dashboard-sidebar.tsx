@@ -22,7 +22,7 @@ const DashboardSidebar = () => {
     return (<section className="flex flex-col gap-4">
         <div className="flex items-center justify-center p-4">
             <Link href="/admin/dashboard">
-                <Image src={LogoIpsumIcon} alt="logo" className="size-16"/>
+                <Image src={LogoIpsumIcon} alt="logo" width={36} height={36}/>
             </Link>
         </div>
         <div className="flex flex-col gap-4">
@@ -32,7 +32,7 @@ const DashboardSidebar = () => {
                     className={`w-full px-2 h-12 flex items-center gap-2 ${pathname === '/admin/dashboard' ? 'bg-zinc-300 text-white font-semibold hover:bg-zinc-400 hover:text-white' : ''}`}
                     variant="outline">
                     <LayoutDashboardIcon/>
-                    <span>Dashboard</span>
+                    <span className="hidden lg:block">Dashboard</span>
                 </Button>
             </Link>
             <Link href="/admin/dashboard/product">
@@ -40,7 +40,7 @@ const DashboardSidebar = () => {
                     className={`w-full px-2 h-12 flex items-center gap-2 ${pathname === '/admin/dashboard/product' ? 'bg-zinc-300 text-white font-semibold hover:bg-zinc-400 hover:text-white' : ''}`}
                     variant="outline">
                     <ShoppingCart/>
-                    <span>Products</span>
+                    <span className="hidden lg:block">Products</span>
                 </Button>
             </Link>
             <Link href="/admin/dashboard/user">
@@ -48,7 +48,7 @@ const DashboardSidebar = () => {
                     className={`w-full px-2 h-12 flex items-center gap-2 ${pathname === '/admin/dashboard/user' ? 'bg-zinc-300 text-white font-semibold hover:bg-zinc-400 hover:text-white' : ''}`}
                     variant="outline">
                     <User/>
-                    <span>User</span>
+                    <span className="hidden lg:block">User</span>
                 </Button>
             </Link>
 
@@ -57,7 +57,7 @@ const DashboardSidebar = () => {
                     className={`w-full px-2 h-12 flex items-center gap-2 ${pathname === '/admin/dashboard/category' ? 'bg-zinc-300 text-white font-semibold hover:bg-zinc-400 hover:text-white' : ''}`}
                     variant="outline">
                     <Grid/>
-                    <span>Category</span>
+                    <span className="hidden lg:block">Category</span>
                 </Button>
             </Link>
             <Link href="/admin/dashboard/payment">
@@ -65,7 +65,7 @@ const DashboardSidebar = () => {
                     className={`w-full px-2 h-12 flex items-center gap-2 ${pathname === '/admin/dashboard/payment' ? 'bg-zinc-300 text-white font-semibold hover:bg-zinc-400 hover:text-white' : ''}`}
                     variant="outline">
                     <CreditCard/>
-                    <span>Payment</span>
+                    <span className="hidden lg:block">Payment</span>
                 </Button>
             </Link>
             <Link href="/admin/dashboard/settings">
@@ -73,18 +73,18 @@ const DashboardSidebar = () => {
                     className={`w-full px-2 h-12 flex items-center gap-2 ${pathname === '/admin/dashboard/settings' ? 'bg-zinc-300 text-white font-semibold hover:bg-zinc-400 hover:text-white' : ''}`}
                     variant="outline">
                     <Settings/>
-                    <span>Settings</span>
+                    <span className="hidden lg:block">Settings</span>
                 </Button>
             </Link>
             <Link href="/sign-in" onClick={handleLogOut}>
                 <Button className="w-full px-2 h-12 flex items-center gap-2" variant="destructive">
                     <LogOut/>
-                    <span>Logout</span>
+                    <span className="hidden lg:block">Logout</span>
                 </Button>
             </Link>
             <Separator/>
         </div>
-        <div className="my-6 flex flex-col items-center justify-center gap-2">
+        <div className="my-6 lg:flex flex-col items-center justify-center gap-2 hidden">
             <h1 className="text-lg font-semibold">Customer Support</h1>
             <p className="text-sm text-muted-foreground">Ask you query, place requests or important issues. Our support
                 team will contact 24/7 to you.</p>

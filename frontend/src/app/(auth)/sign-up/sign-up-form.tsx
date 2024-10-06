@@ -61,7 +61,7 @@ const SignInForm = () => {
                 render={({field}) => (<FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                        <InputField inputFieldType="password" field={field}/>
+                        <InputField inputFieldType="password" field={field} placeholder="Password"/>
                     </FormControl>
                     <FormMessage/>
                 </FormItem>)}/>
@@ -72,7 +72,7 @@ const SignInForm = () => {
                 render={({field}) => (<FormItem>
                     <FormLabel>Confirm Password</FormLabel>
                     <FormControl>
-                        <InputField inputFieldType="password" field={field}/>
+                        <InputField inputFieldType="password" field={field} placeholder="Confirm Password"/>
                     </FormControl>
                     <FormMessage/>
                 </FormItem>)}/>

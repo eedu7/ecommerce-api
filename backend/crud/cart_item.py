@@ -19,7 +19,7 @@ class CartItemCRUD(BaseCrud[CartItem]):
             )
 
     async def create_cart_item(
-            self, cart_id: int, product_id: int, user_id: int, quantity: int = 1
+        self, cart_id: int, product_id: int, user_id: int, quantity: int = 1
     ) -> CartItem:
         cart_item = await self.create(
             {
@@ -56,7 +56,7 @@ class CartItemCRUD(BaseCrud[CartItem]):
         return True
 
     async def update_cart_item(
-            self, cart_item_id: int, attributes: dict[str, any]
+        self, cart_item_id: int, attributes: dict[str, any]
     ) -> CartItem:
         try:
             return await self.update(cart_item_id, attributes)

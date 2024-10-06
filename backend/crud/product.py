@@ -59,7 +59,6 @@ class ProductCRUD(BaseCrud[Product]):
                 raise HTTPException(
                     status_code=status.HTTP_404_NOT_FOUND,
                     detail="Product not found",
-
                 )
             return product
         except Exception as e:
@@ -69,7 +68,7 @@ class ProductCRUD(BaseCrud[Product]):
             )
 
     async def update_product(
-            self, product_id: int, attributes: dict[str, Any]
+        self, product_id: int, attributes: dict[str, Any]
     ) -> Product:
         try:
             updated_product = await self.update(product_id, attributes)
@@ -82,7 +81,7 @@ class ProductCRUD(BaseCrud[Product]):
 
     async def delete_product(self, product_id: int) -> bool:
         try:
-            deleted = await self.get_by_id(product_id)
+            deleted = await self.delete(product_id)
             if deleted:
                 return True
             raise HTTPException(

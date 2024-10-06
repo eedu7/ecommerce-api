@@ -19,6 +19,8 @@ class Config(ConfigSettings):
     SECRET_KEY: str = os.getenv("SECRET_KEY")
     JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM")
     JWT_EXPIRY: int = 60 * 24 * 7
+    STRIPE_SECRET_KEY: str = os.getenv("STRIPE_SECRET_KEY")
+    STRIPE_PUBLISHABLE_KEY: str = os.getenv("STRIPE_PUBLISHABLE_KEY")
 
 
 config: Config = Config()

@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "name": "Smartphone",
+    "description": "Latest 5G smartphone with high-end features.",
+    "price": 799.99,
+    "stock_quantity": 50,
+    "category_id": 1,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 2,
+    "name": "Men's T-Shirt",
+    "description": "100% cotton crew-neck t-shirt.",
+    "price": 19.99,
+    "stock_quantity": 200,
+    "category_id": 2,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 3,
+    "name": "Washing Machine",
+    "description": "Front-loading washing machine with 7kg capacity.",
+    "price": 499.99,
+    "stock_quantity": 30,
+    "category_id": 3,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 4,
+    "name": "Office Chair",
+    "description": "Ergonomic office chair with adjustable height.",
+    "price": 149.99,
+    "stock_quantity": 100,
+    "category_id": 4,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 5,
+    "name": "Mystery Novel",
+    "description": "Thrilling mystery novel by a bestselling author.",
+    "price": 12.99,
+    "stock_quantity": 500,
+    "category_id": 5,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 6,
+    "name": "Facial Moisturizer",
+    "description": "Hydrating facial moisturizer with SPF 30.",
+    "price": 24.99,
+    "stock_quantity": 150,
+    "category_id": 6,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 7,
+    "name": "Children's Toy Car",
+    "description": "Remote-controlled toy car with rechargeable battery.",
+    "price": 29.99,
+    "stock_quantity": 120,
+    "category_id": 7,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 8,
+    "name": "Mountain Bike",
+    "description": "21-speed mountain bike with suspension.",
+    "price": 599.99,
+    "stock_quantity": 15,
+    "category_id": 8,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 9,
+    "name": "Organic Apple",
+    "description": "Fresh organic apple, sold by the kilogram.",
+    "price": 3.99,
+    "stock_quantity": 1000,
+    "category_id": 9,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 10,
+    "name": "Yoga Mat",
+    "description": "Non-slip yoga mat, 6mm thick.",
+    "price": 29.99,
+    "stock_quantity": 300,
+    "category_id": 10,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 11,
+    "name": "Car Air Freshener",
+    "description": "Long-lasting air freshener for your car.",
+    "price": 4.99,
+    "stock_quantity": 500,
+    "category_id": 11,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 12,
+    "name": "Dog Food",
+    "description": "Premium dog food for all breeds.",
+    "price": 29.99,
+    "stock_quantity": 200,
+    "category_id": 12,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 13,
+    "name": "Gold Necklace",
+    "description": "Elegant 18K gold necklace.",
+    "price": 399.99,
+    "stock_quantity": 10,
+    "category_id": 13,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 14,
+    "name": "Stapler",
+    "description": "Durable office stapler.",
+    "price": 9.99,
+    "stock_quantity": 500,
+    "category_id": 14,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 15,
+    "name": "Gaming Console",
+    "description": "Next-gen gaming console with 1TB storage.",
+    "price": 499.99,
+    "stock_quantity": 100,
+    "category_id": 15,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 16,
+    "name": "Acoustic Guitar",
+    "description": "High-quality acoustic guitar for beginners and professionals.",
+    "price": 199.99,
+    "stock_quantity": 50,
+    "category_id": 16,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 17,
+    "name": "Smartwatch",
+    "description": "Fitness tracking smartwatch with heart rate monitor.",
+    "price": 199.99,
+    "stock_quantity": 75,
+    "category_id": 1,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 18,
+    "name": "Women's Dress",
+    "description": "Elegant evening dress in silk.",
+    "price": 79.99,
+    "stock_quantity": 120,
+    "category_id": 2,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 19,
+    "name": "Microwave Oven",
+    "description": "800W microwave oven with grill function.",
+    "price": 149.99,
+    "stock_quantity": 40,
+    "category_id": 3,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 20,
+    "name": "Leather Office Chair",
+    "description": "High-back leather office chair with lumbar support.",
+    "price": 249.99,
+    "stock_quantity": 80,
+    "category_id": 4,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 21,
+    "name": "Cookbook",
+    "description": "Healthy cooking recipes for beginners.",
+    "price": 19.99,
+    "stock_quantity": 300,
+    "category_id": 5,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 22,
+    "name": "Shampoo",
+    "description": "Nourishing shampoo for all hair types.",
+    "price": 9.99,
+    "stock_quantity": 200,
+    "category_id": 6,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 23,
+    "name": "Board Game",
+    "description": "Family-friendly board game for all ages.",
+    "price": 34.99,
+    "stock_quantity": 90,
+    "category_id": 7,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 24,
+    "name": "Tent",
+    "description": "Waterproof tent for 4 people.",
+    "price": 199.99,
+    "stock_quantity": 30,
+    "category_id": 8,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 25,
+    "name": "Organic Banana",
+    "description": "Fresh organic bananas, sold by the kilogram.",
+    "price": 2.99,
+    "stock_quantity": 1500,
+    "category_id": 9,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 26,
+    "name": "Treadmill",
+    "description": "Foldable treadmill with incline settings.",
+    "price": 899.99,
+    "stock_quantity": 20,
+    "category_id": 10,
+    "created_by": 1,
+    "updated_by": 1
+  },
+  {
+    "id": 27,
+    "name": "Car Seat Cover",
+    "description": "Leather car seat covers, set of 4.",
+    "price": 129.99,
+    "stock_quantity": 100,
+    "category_id": 11,
+    "created_by": 1,
+    "updated_by": 1
+  }
+]

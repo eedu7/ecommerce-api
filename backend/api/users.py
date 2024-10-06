@@ -27,8 +27,12 @@ async def get_users(
 
 
 @router.post("/", response_model=UserRead)
-async def register(data: RegisterUser, crud: UserCrud = Depends(get_user_crud)) -> User:
-    return await crud.register_user(data.model_dump())
+async def register(data: RegisterUser, crud: UserCrud = Depends(get_user_crud)):
+    user = await crud.register_user(data.model_dump())
+    if user:
+        raise HTTPException(
+            status_code=status.HTTP_201_CREATED, detail="User created successfully"
+        )
 
 
 @router.post("/login", response_model=Token)

@@ -2,8 +2,11 @@ from pydantic import BaseModel, Field
 
 
 class CategoryBase(BaseModel):
-    name: str = Field(..., examples=["T-Shirt"])
-    description: str | None = Field(None, examples=["Some description"])
+    name: str = Field(..., examples=["Fashion"])
+    description: str | None = Field(
+        None,
+        examples=["Clothing, accessories, and footwear for men, women, and children."],
+    )
 
 
 class CategoryCreate(CategoryBase):
@@ -11,8 +14,10 @@ class CategoryCreate(CategoryBase):
 
 
 class CategoryUpdate(CategoryBase):
-    name: str | None = Field(None, examples=["Name"])
-    description: str | None = Field(None, examples=["Some description"])
+    name: str | None = Field(None, examples=["Books"])
+    description: str | None = Field(
+        None, examples=["Wide range of books across different genres and languages."]
+    )
 
 
 class CategoryResponse(CategoryBase):

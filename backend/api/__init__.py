@@ -1,9 +1,10 @@
-from fastapi import Depends, FastAPI, Request, status
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 
-from dependencies.authentication import AuthenticationRequired
+from db import get_async_session
 from middlewares.authentication import AuthBackend, AuthenticationMiddlewares
+from utils.seeders import seed_categories, seed_products, seed_users
+
 from .cart import router as cart_router
 from .cart_item import router as cart_item_router
 from .category import router as category_router
@@ -23,21 +24,17 @@ app.add_middleware(
     allow_methods=["*"],
 )
 
-
-@app.get("/", dependencies=[Depends(AuthenticationRequired)])
-async def root(request: Request):
-    try:
-        user_id = request.user.id
-        return {"message": f"Welcome User with ID: {user_id}"}
-    except Exception as e:
-        return JSONResponse(
-            status_code=status.HTTP_200_OK, content={"message": f"Ecommerce API: {e}"}
-        )
-
-
 app.include_router(user_router, prefix="/users", tags=["User"])
 app.include_router(category_router, prefix="/categories", tags=["Category"])
 
 app.include_router(product_router, prefix="/product", tags=["Product"])
 app.include_router(cart_router, prefix="/cart", tags=["Cart"])
 app.include_router(cart_item_router, prefix="/cart-item", tags=["CartItem"])
+
+
+@app.on_event("startup")
+async def startup_event():
+    async for db in get_async_session():
+        await seed_users(db)
+        await seed_categories(db)
+        await seed_products(db)

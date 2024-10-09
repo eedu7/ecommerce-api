@@ -5,5 +5,5 @@ Sample solution for the [e-commerce](https://roadmap.sh/projects/ecommerce-api) 
 ## How to run
 
 ```bash
-$ git clone https://github.com/eedu7/url-shortening-service.git
+$ git clone https://github.com/eedu7/e-commerce.git
 ```
